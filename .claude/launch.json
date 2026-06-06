@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "dockerforge-frontend",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "/Users/satyam/Desktop/Docker/.claude/worktrees/tender-sutherland-fe7b93/dockerforge/frontend",
+      "port": 5173
+    }
+  ]
+}

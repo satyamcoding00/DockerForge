@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  dockerforge:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      # Docker-in-Docker: mount host Docker socket so the agent can run docker build/run
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Persist cloned repos between restarts (optional)
+      - /tmp/dockerforge:/tmp/dockerforge
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: run backend and frontend separately for local dev
+  # backend-dev:
+  #   build:
+  #     context: .
+  #     dockerfile: backend/Dockerfile.dev
+  #   ...
